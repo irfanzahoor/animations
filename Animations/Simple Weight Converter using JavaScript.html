@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Weight Convertor</title>
+  <style media="screen">
+  @import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+
+* {
+box-sizing: border-box;
+}
+
+body {
+display: flex;
+align-items: center;
+justify-content: center;
+min-height: 100vh;
+margin: 0;
+text-align: center;
+font-family: "Poppins", sans-serif;
+background: #0462a4;
+}
+
+.container {
+background: #ede574; /* fallback for old browsers */
+border-radius: 7px;
+width: 400px;
+padding: 0.5rem 2rem 2rem 2rem;
+box-shadow: 0px 0px 10px #bebebe;
+}
+
+input {
+font-family: "Poppins", sans-serif;
+padding: 10px;
+margin-bottom: 10px;
+}
+#enter-btn{
+  background: #0472ad;
+  border: none;
+  padding: 12px;
+  color: white;
+}
+
+.error {
+color: red;
+}
+
+.successfull {
+color: green; 
+  font-size: 18px;
+  font-weight:600;
+}
+  </style>
+</head>
+<body>
+  <div class="container">
+        <form action="">
+          <h1>Weight Convertor</h1>
+          <label for="weight-converter">KG : </label>
+          <input type="text" step="5" placeholder="Enter your weight in Kg"/>
+          <input type="submit" id="enter-btn" value="Enter">
+          <p>Your weight in POUNDS is : <span id="convertedWeight"></span></p>
+        </form>
+      </div>
+      <script type="text/javascript">
+
+      const form = document.querySelector("form");
+
+      form.addEventListener('submit', function(e) {
+          e.preventDefault();
+          const input = document.querySelector("input");
+          var convertedWeight = document.querySelector("span");
+          var kgTOpound;
+
+          if ((isNaN(input.value)) || input.value <= 0) {
+              convertedWeight.classList.add("error");
+              convertedWeight.innerHTML = "<p>Please enter a valid number!</p>";
+
+              setTimeout(() => {
+                  convertedWeight.innerHTML = "";
+                  convertedWeight.classList.remove("error");
+              }, 2500);
+              input.value = "";
+          } else {
+              kgTOpound = Number(input.value) * 2.20462;
+              convertedWeight.classList.add("successfull");
+              convertedWeight.innerHTML = `${kgTOpound.toFixed(2)}`;
+
+              setTimeout(() => {
+                  convertedWeight.innerHTML = "";
+                  input.value = "";
+                  convertedWeight.classList.remove("successfull");
+              }, 20000);
+          }
+      })
+
+      var enterInput = document.getElementById("enter-btn");
+      enterInput.addEventListener("keyup", function(event) {
+          if (event.keyCode === 13) {
+              event.preventDefault();
+              document.getElementById("enter-btn").click();
+          }
+      });
+      </script>
+</body>
+</html>
